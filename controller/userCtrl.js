@@ -71,4 +71,20 @@ const getallUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createUser, loginUserCtrl, getallUser };
+// Get a single user
+
+const getaUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  // validateMongoDbId(id);
+
+  try {
+    const getaUser = await User.findById(id);
+    res.json({
+      getaUser,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser };
